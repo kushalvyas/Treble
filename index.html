@@ -1,0 +1,105 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Treble | BitsMakeMeCrazy</title>
+		<style type="text/css">
+			input-placeholder{
+				color:white;
+			}
+			#downloadprogressbar{
+				color:red;
+			}
+		</style>
+		
+	</head>
+	<body> 
+		<script type="text/javascript" src="libs/js/jquery-1.11.3.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="libs/css/bootstrap.css">
+		<link rel="stylesheet" type="text/css" href="libs/mui-0.2.3/css/mui.min.css">
+		<link rel="stylesheet" type="text/css" href="libs\font-awesome-4.5.0\font-awesome-4.5.0\css/font-awesome.css">
+		<script type="text/javascript" src="libs/js/bootstrap.js"></script>
+		<script type="text/javascript" src="./libs/js/search.js"></script>
+		<script type="text/javascript" src="libs/js/downloadhandler.js"></script>
+		<script type="text/javascript">
+			// write menu here	
+			const Menu = require('menu');
+			const MenuItem = require('menu-item');
+			const Tray = require('tray');
+			menu = new Menu();
+
+			menu.append(new MenuItem({ label: "About", id:'about', click: function(){ console.log("asd"); } }));
+			menu.append(new MenuItem({ label: 'Quit', id: 'quit', click: function() { app.quit(); } }));
+			
+		</script>	
+		<script type="text/javascript">
+			function redirect_home(){
+				window.location.href="./home.html";
+			}
+		</script>
+		<style type="text/css">
+
+			footer {
+			  position: absolute;
+			  bottom: 0;
+			  width: 100%;
+			  /* Set the fixed height of the footer here */
+			  height: 100px;
+			  background-color: #eee;
+			}
+
+		</style>
+
+
+		<!-- <nav class='navbar navbar-default navbar-fixed-top'>
+			<br>
+			<div class='mui-container'>
+				<div id="navbar" class="navbar-collapse collapse">
+					<ul class="nav navbar-nav"><li><input id="query" value="shortest youtube videos" class='form-control'type="text"/></li></ul>
+					<ul class="nav navbar-nav navbar-right">
+		       			<li><button id="search-button" class='btn btn-default' onclick="search()">Search</button></li>	
+			        </ul>
+					
+				</div>
+			</div>
+			<br>
+		</nav> -->
+
+		<header  class='mui-appbar mui--z1'>
+			<div class="mui-container">
+				<table width="100%">
+					<tr class="mui--appbar-height" >
+						<td class="mui-textfield" >
+							<input id="query" class="mui--text-title" style="color:#ffffff;" type="text" placeholder="enter query"/>
+						</td>
+						<td align="right">
+							<button class="mui-btn mui-btn--raised"  id="search-query-button" onclick="search();">Search</button>
+						</td>
+						<td align="right"><a ><button class="mui-btn mui-btn--raised" id="redirect-to-home" onclick="redirect_home();">Back</button></a></td>
+					</tr>
+				</table>
+			</div>
+
+		</header>			
+		
+		<div class='mui-container-fluid'>
+				
+			<div id="search-container">
+			</div>
+
+		</div>
+
+		
+		
+	<!-- <footer>
+		<div class="mui-container ">	
+			<div id = "downloadprogressbar" class="mui--text-display5"></div>
+		</div>
+	</footer> -->
+
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+		<!-- // <script src="./libs/js/search.js"></script> -->
+		<!-- // <script src="https://apis.google.com/js/client.js?onload=googleApiClientReady"></script> -->
+
+		
+	</body>
+</html>

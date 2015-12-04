@@ -1,4 +1,4 @@
-var youtubedl = require('youtube-dl');
+// var youtubedl = require('youtube-dl');
 var punycode = require('punycode');
 var utf8 = require('utf8');
 var fs = require('fs');
@@ -40,19 +40,12 @@ var slashes = require('slashes');
 
 */
 
-
-
-function download1(x){
-	exec_mp3('9uDgJ9_H0gg'); 
-	// get_output_path();
-	
-}
-
 var spawn = require('child_process').spawn;
+	
 var exec = require('child_process').exec;
 function download(x){
 	var	url = x.id;
-	var urlstring = utf8.encode(url);
+	var urlstring =  utf8.encode(url);
 	var progress = document.getElementById('downloadprogressbar_'+url.toString());
 	progress.style.color = '#2196F3';
 	// show_download_options(); to add blocking support
@@ -63,11 +56,14 @@ function download(x){
 	//         console.log('exec error: ' + error);
 	//     }
 	// });
-	var output_string = " -o \"%(title)s.%(ext)s\"  "
+	var output_path = get_output_path();
+	console.log(output_path);
+	var output_string = output_path +"//"+ "%(title)s.%(ext)s\'  "
 	console.log("urlstringtostring is :",urlstring.toString());
 	var processString = 'youtube-dl '+ urlstring.toString();
-	var node = spawn('youtube-dl', [urlstring.toString() + output_string]);
-	console.log("spawning node process for youtubedl", node);
+	console.log(output_string);
+	var node = spawn('youtube-dl', [urlstring,"-o",output_string]);
+	console.log("spawning node process for youtube-dl", node);
 	node.stdout.on('data',function(data){
 		console.log(data.toString());
 		progress.innerHTML = data.toString();

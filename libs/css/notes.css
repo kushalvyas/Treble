@@ -1,0 +1,31 @@
+/*html, body { 
+    background-color: #cccccc;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    position: relative;
+}*/
+
+.newbox {
+    position: absolute;
+    background-color: #F5F5DC;
+    height: 100%;
+    /*width: 200px;*/
+    box-shadow: 10px 10px 10px #888;
+    padding: 20px;
+    z-index: 1000;
+}
+
+textarea {
+
+    background: #F5F5DC;
+    /*width: 200px;*/
+    height: 100%;
+    border: 0;
+}
+#canvas {
+    /*height:auto !important;*/
+    min-height: 100%;
+    height:100%;
+    z-index: -1000;
+}

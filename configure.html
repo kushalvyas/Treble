@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Treble | BitsMakeMeCrazy</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- load MUI -->
+    <link href="libs/mui-0.2.3/css/mui.min.css" rel="stylesheet" type="text/css" />
+    <script src="libs/mui-0.2.3/js/mui.min.js"></script>
+    <script type="text/javascript">
+      function redirect_home(){
+        window.location.href = "./home.html";
+      }
+    </script>
+    
+    <script type="text/javascript" src="libs/js/config.js"></script>
+  </head>
+  <body>
+    <!-- example content -->
+    <header class="mui-appbar mui--z1">
+    <!-- Appbar HTML goes here -->
+    <div class="mui-container">
+      <table width="100%">
+        <tr class="mui--appbar-height">
+          <td class="mui--text-title">Configure Treble</td>
+          <!-- <td align="right">Turn up your Tunes !!</td> -->
+          <td align="right"><a ><button class="mui-btn mui-btn--raised" id="redirect-to-home" onclick="redirect_home();">Back</button></a></td>
+        </tr>
+      </table>
+    </div>
+
+  </header>
+  <br>
+    <div class="mui-container">
+      <div class="mui-panel">
+        <center>
+          <!-- <h3>Configure Treble</h3> -->
+          <div class="mui-panel">
+           <div class="mui-textfield mui-textfield--float-label">
+              <input type="text" id="output_path">
+              <label>Enter folder for output</label>
+            </div>
+          </div>
+          <button onclick="set_output_path();" class="mui-btn mui-btn--primary mui-btn--raised">Apply Changes</button>
+        </center>
+      </div>
+    </div>
+  </body>
+</html>

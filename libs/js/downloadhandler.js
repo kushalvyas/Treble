@@ -40,14 +40,11 @@ var slashes = require('slashes');
 
 */
 
-function download(x){
-	exec_mp3("Will");
-}
 
 var spawn = require('child_process').spawn;
 	
 var exec = require('child_process').exec;
-function download1(x){
+function download(x){
 	var	url = x.id;
 	var urlstring =  utf8.encode(url);
 	var progress = document.getElementById('downloadprogressbar_'+url.toString());
@@ -66,7 +63,7 @@ function download1(x){
 	console.log("urlstringtostring is :",urlstring.toString());
 	var processString = 'youtube-dl '+ urlstring.toString();
 	console.log(output_string);
-	var node = spawn('youtube-dl', [urlstring,"-o",output_string]);
+	var node = spawn('youtube-dl', [urlstring,"-o",output_string,'--audio-format',"mp3" ,'--extract-audio']);
 	console.log("spawning node process for youtube-dl", node);
 	node.stdout.on('data',function(data){
 		console.log(data.toString());
@@ -82,74 +79,11 @@ function download1(x){
 		}else{
 			var partial_url = urlstring.split("v=")[1];
 			console.log(partial_url);
-			exec_mp3(partial_url);	
+			console.log("process completed");
+			// exec_mp3(partial_url);	
 
 		}
 	});
-}
-
-function exec_mp3(url){
-	var filename = null;
-	// var path = "C:\\Users\\bini\\Desktop\\treble\\"; // get output path
-	// console.log("path is ",path);
-	// path = get_output_path(function(name){
-	// 	var test = name;
-	// 	console.log("name  = ",name);
-	// 	test = name.app.output_path[0];
-	// 	test = slashes.add(test);
-	// 	return test;
-	// });
-	var path = get_output_path();
-	console.log("path is ",path);
-
-	// var checkfinder = finder(path+"//"+url);
-	// checkfinder.on("file", function(file){
-	// 	if(file.indexOf(url) > -1){
-	// 		console.log("files = ", file);
-	// 		filename = file;
-	// 		filename = slashes.add(filename);
-	// 		console.log(filename);
-	// 		var updated_filename = filename 	
-	// 		var list = ['-i', updated_filename, '-acodec', 'libmp3lame',filename+'.mp3'];
-	// 		var ffmpeg = spawn("ffmpeg", list);
-	// 		console.log(ffmpeg, list);
-	// 		ffmpeg.stdout.on('data',function(data){
-	// 			console.log(data);
-	// 		});
-	// 		ffmpeg.on('error', function(error){
-	// 			console.log(error);
-	// 		});
-	// 	}
-
-	// });
-
-
-	console.log("path is  : ",path);
-	var process_find= "find "+path+ " -type f -name \"*"+url + "*\"";
-	console.log(process_find); 
-	exec(process_find, function (error, stdout, stderr){
-		console.log('error' + error);
-		console.log('stdout' + stdout);
-		console.log('stderr' + stderr);
-		filename = stdout.substr(0, stdout.length -1);
-		console.log("filename  : ", filename);
-		if(error != null){
-			alert("Error in file read operation");
-		}
-		else{
-			var list = ['-i',filename,'-acodec','libmp3lame',filename+'.mp3'];
-			var ffmpeg = spawn("ffmpeg",list);
-			console.log(ffmpeg , list);
-			ffmpeg.stdout.on('data', function(data){
-				console.log('data is : ' + data);
-			});
-			ffmpeg.on('error',function(error){
-				console.log(error);
-			});
-		}
-	});
-	
-
 }
 
 

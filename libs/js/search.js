@@ -1,6 +1,6 @@
 
-var progressbar = require("progressbar.js");
-var line = new ProgressBar.Line('downloadprogressbar', { color:"#000000" });
+// var progressbar = require("progressbar.js");
+// var line = new ProgressBar.Line('downloadprogressbar', { color:"#000000" });
 
 
 // Search for a specified string.
@@ -37,8 +37,8 @@ function callback(x){
       // console.log("true");
       // console.log(jsonobj.items[i]);
       var url = "http://www.youtube.com/watch?v=" + jsonobj.items[i].id.videoId;
-      var button_span = "<button type='button' id = '"+ url +"' class='mui-btn mui-btn--primary mui-btn--fab' aria-label='Left Align' onclick='download(this)'>"+
-                        "<i class='fa fa-download'></i></button>";
+      var button_span = "<div class= 'mui--text-right'><button type='button' id = '"+ url +"' align='right' class='mui-btn mui-btn--primary mui-btn--fab ' aria-label='Right Align' onclick='download(this)'>"+
+                        "<i class='fa fa-download'></i></button></div>";
       var title = jsonobj.items[i].snippet.title;
       // var data_in_row = "<h4>"+ title+button_span+"</h4><h6>"+url+"</h6>";
       var id_p = "<p id='downloadprogressbar_" + url.toString() + "'></p>";

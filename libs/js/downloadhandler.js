@@ -40,11 +40,19 @@ var slashes = require('slashes');
 
 */
 
+function download1(x){
+
+	var x1 = show_download_options();
+	download_main(x,x1);
+}
+
 
 var spawn = require('child_process').spawn;
 	
 var exec = require('child_process').exec;
+
 function download(x){
+	
 	var	url = x.id;
 	var urlstring =  utf8.encode(url);
 	var progress = document.getElementById('downloadprogressbar_'+url.toString());
@@ -63,11 +71,36 @@ function download(x){
 	console.log("urlstringtostring is :",urlstring.toString());
 	var processString = 'youtube-dl '+ urlstring.toString();
 	console.log(output_string);
-	var node = spawn('youtube-dl', [urlstring,"-o",output_string,'--audio-format',"mp3" ,'--extract-audio']);
+	// var processlist = show_download_options(urlstring, output_string);
+
+	// defining processlist for spawning the  process
+	// if(downloadMP3){
+	// 	var processlist = [urlstring,"-o",output_string,'--audio-format',"mp3" ,'--extract-audio'];
+	// }else{
+	// 	var processlist = [urlstring,"-o",output_string];
+	// }
+	var processlist = [urlstring,"-o",output_string,'--audio-format',"mp3" ,'--extract-audio'];
+	console.log(processlist)
+	progress.innerHTML = "Initiating Download..."
+	var node = spawn('youtube-dl', processlist);
 	console.log("spawning node process for youtube-dl", node);
 	node.stdout.on('data',function(data){
 		console.log(data.toString());
-		progress.innerHTML = data.toString();
+		if(data.toString().substring(0,9) == "[youtube]"){
+			progress.innerHTML = "Beginning Download...";
+		}else{
+
+			var indexofcolon = data.toString().indexOf(']');
+			var stripped_data = data.toString().substring(indexofcolon+1,data.toString().length);
+			if(stripped_data.substring(0,8) != 'Deleting')
+				progress.innerHTML = stripped_data.toString();
+			if(stripped_data.substring(0,8) == "Deleting"){
+				progress.innerHTML = "Done";
+			}
+			// write if else tree...to segregate [youtube]. [download] and [ffmpeg commands] as well as Deleting Commands
+			// "No need to display dash manifest data...instead show initiating download"
+		}
+
 		
 	});
 
@@ -76,26 +109,36 @@ function download(x){
 		if (code!=0){
 			console.log(code);
 			alert("Process has crashed","Treble");
+			progress.innerHTML = "Oops.. Some problem occured...!"
 		}else{
 			var partial_url = urlstring.split("v=")[1];
 			console.log(partial_url);
 			console.log("process completed");
 			// exec_mp3(partial_url);	
+			progress.innerHTML = "Done";
 
 		}
 	});
 }
 
 
-function show_download_options(){
-	var message = "Do  you want mp3 ?";
+function show_download_options(urlstring, output_string){
+	var message = "Do  you want mp3 ? \nPress OK to download mp3 \nClose dialog to continue with video download ";
 	var title = "Download opts";
 	dialog.info(message, title, function(err){
 		console.log(err);
+		
+		// if(!err){
+		// 	var processlist = [urlstring,"-o",output_string,'--audio-format',"mp3" ,'--extract-audio'];
+		// 	return processlist;
+		// }
+		// else{
+		// 	var processlist = [urlstring,"-o",output_string];
+		// 	return processlist;
+		// }
 		if(!err){
 			return true;
-		}
-		else{
+		}else{
 			return false;
 		}
 	});

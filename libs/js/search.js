@@ -4,8 +4,11 @@
 
 
 // Search for a specified string.
+
+
 function search() {
   var search_container = $('#search-container');
+
   search_container.empty();
   var q = $('#query').val();
   console.log("query values is ",q);
@@ -50,5 +53,5 @@ function callback(x){
   }
 
   console.log("done...fetched results");
-  
+
 }
